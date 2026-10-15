@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg_nft-5" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1d4ed8"/>
+      <stop offset="50%" stop-color="#14112e"/>
+      <stop offset="100%" stop-color="#06b6d4"/>
+    </linearGradient>
+    <linearGradient id="mesh_nft-5" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#06b6d4" stop-opacity="0.2"/>
+    </linearGradient>
+    <filter id="glow_nft-5" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="25" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="600" fill="url(#bg_nft-5)" rx="16"/>
+
+  <!-- Cyber Grid Lines -->
+  <g stroke="rgba(255,255,255,0.08)" stroke-width="1">
+    <line x1="0" y1="100" x2="600" y2="100"/>
+    <line x1="0" y1="200" x2="600" y2="200"/>
+    <line x1="0" y1="300" x2="600" y2="300"/>
+    <line x1="0" y1="400" x2="600" y2="400"/>
+    <line x1="0" y1="500" x2="600" y2="500"/>
+    <line x1="100" y1="0" x2="100" y2="600"/>
+    <line x1="200" y1="0" x2="200" y2="600"/>
+    <line x1="300" y1="0" x2="300" y2="600"/>
+    <line x1="400" y1="0" x2="400" y2="600"/>
+    <line x1="500" y1="0" x2="500" y2="600"/>
+  </g>
+
+  <!-- Glowing Orb Backing -->
+  <circle cx="300" cy="300" r="160" fill="url(#mesh_nft-5)" filter="url(#glow_nft-5)"/>
+
+  <!-- Abstract Geometry based on Badge -->
+  <!-- Center Main 3D Shape -->
+  <g transform="translate(300, 290)">
+    <polygon points="0,-130 115,-65 115,65 0,130 -115,65 -115,-65" fill="#3b82f6" opacity="0.35"/>
+    <polygon points="0,-110 95,-55 95,55 0,110 -95,55 -95,-55" fill="none" stroke="#ffffff" stroke-width="3" opacity="0.8"/>
+    
+    <!-- Isometric Cube / Sphere Inner -->
+    <path d="M 0 0 L 95 -55 L 95 55 L 0 110 Z" fill="#06b6d4" opacity="0.7"/>
+    <path d="M 0 0 L -95 -55 L -95 55 L 0 110 Z" fill="#3b82f6" opacity="0.85"/>
+    <path d="M 0 0 L 95 -55 L 0 -110 L -95 -55 Z" fill="#ffffff" opacity="0.4"/>
+    
+    <circle cx="0" cy="0" r="28" fill="#ffffff" filter="url(#glow_nft-5)"/>
+    <circle cx="0" cy="0" r="16" fill="#06b6d4"/>
+  </g>
+
+  <!-- Floating Rings and Particles -->
+  <ellipse cx="300" cy="460" rx="180" ry="35" fill="none" stroke="#3b82f6" stroke-width="2" opacity="0.4"/>
+  <ellipse cx="300" cy="480" rx="130" ry="22" fill="none" stroke="#ffffff" stroke-width="1.5" opacity="0.6"/>
+
+  <circle cx="120" cy="180" r="6" fill="#ffffff" opacity="0.8"/>
+  <circle cx="480" cy="160" r="8" fill="#3b82f6" opacity="0.9"/>
+  <circle cx="460" cy="420" r="5" fill="#ffffff" opacity="0.7"/>
+  <circle cx="150" cy="440" r="7" fill="#06b6d4" opacity="0.8"/>
+
+  <!-- Tag Pill in Corner -->
+  <rect x="30" y="30" width="105" height="32" rx="16" fill="rgba(18, 16, 37, 0.75)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+  <text x="82" y="51" font-family="'Inter', sans-serif" font-size="12" font-weight="700" fill="#ffffff" text-anchor="middle" letter-spacing="1">METAVERSE</text>
+
+  <!-- Rarity / Token ID in Corner -->
+  <rect x="470" y="30" width="100" height="32" rx="16" fill="rgba(115, 91, 242, 0.3)" stroke="#735bf2" stroke-width="1"/>
+  <text x="520" y="51" font-family="'Inter', sans-serif" font-size="12" font-weight="600" fill="#a78bfa" text-anchor="middle">★ RARE</text>
+</svg>

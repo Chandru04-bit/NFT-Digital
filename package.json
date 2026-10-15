@@ -1,0 +1,17 @@
+{
+  "name": "nft-digital-marketplace",
+  "version": "1.0.0",
+  "description": "A complete, modern, pixel-perfect, responsive **NFT Digital Marketplace Dashboard Website** developed in strict alignment with modern Web3 Figma designs. Features a default deep navy and dark purple aesthetic, vibrant purple accents, real-time Chart.js market charts, dynamic bidding modals with validation, full LocalStorage persistence, multi-category filters, and responsive layouts across all device form factors.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  }
+}

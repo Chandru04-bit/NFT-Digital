@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Collections - NovaNFT Marketplace</title>
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo/favicon.svg">
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Custom Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/themes.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body data-page="collections">
+
+  <div class="app-wrapper">
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+    <!-- SIDEBAR -->
+    <aside class="app-sidebar" id="appSidebar">
+      <div class="sidebar-header">
+        <a href="index.html" class="brand-logo">
+          <img src="assets/images/logo/favicon.svg" alt="NovaNFT Logo">
+          <span>Nova<span>NFT</span></span>
+        </a>
+      </div>
+
+      <div class="sidebar-nav">
+        <div class="nav-section-title">Main Menu</div>
+        <ul class="sidebar-menu">
+          <li class="sidebar-menu-item">
+            <a href="index.html">
+              <i class="fa-solid fa-house"></i>
+              <span>Home</span>
+            </a>
+          </li>
+          <li class="sidebar-menu-item">
+            <a href="bids.html">
+              <i class="fa-solid fa-gavel"></i>
+              <span>Bids</span>
+              <span class="nav-badge">Live</span>
+            </a>
+          </li>
+          <li class="sidebar-menu-item">
+            <a href="saved.html">
+              <i class="fa-solid fa-heart"></i>
+              <span>Saved</span>
+            </a>
+          </li>
+          <li class="sidebar-menu-item active">
+            <a href="collections.html">
+              <i class="fa-solid fa-layer-group"></i>
+              <span>Collections</span>
+            </a>
+          </li>
+          <li class="sidebar-menu-item">
+            <a href="profile.html">
+              <i class="fa-solid fa-user"></i>
+              <span>Profile</span>
+            </a>
+          </li>
+          <li class="sidebar-menu-item">
+            <a href="settings.html">
+              <i class="fa-solid fa-gear"></i>
+              <span>Settings</span>
+            </a>
+          </li>
+        </ul>
+
+        <div class="nav-section-title">Account</div>
+        <ul class="sidebar-menu">
+          <li class="sidebar-menu-item">
+            <a href="#" class="btn-logout">
+              <i class="fa-solid fa-arrow-right-from-bracket"></i>
+              <span>Logout</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-pro-card">
+          <i class="fa-solid fa-wand-magic-sparkles text-primary mb-2" style="font-size:22px;"></i>
+          <h5>Create Your NFT</h5>
+          <p>Mint and showcase your exclusive artworks globally.</p>
+          <a href="collections.html" class="btn-primary-nft btn-sm-nft w-100">Create NFT</a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <div class="app-main">
+      <header class="app-header">
+        <div class="header-left">
+          <button class="sidebar-toggle-btn" id="sidebarToggleBtn" aria-label="Toggle Navigation">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          
+          <div class="header-search">
+            <div class="search-input-wrapper">
+              <i class="fa-solid fa-magnifying-glass search-icon"></i>
+              <input type="text" class="search-input" id="globalSearchInput" placeholder="Search collections... (Press '/' to focus)">
+              <button class="search-clear-btn" id="searchClearBtn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="search-results-dropdown" id="searchResultsDropdown"></div>
+          </div>
+        </div>
+
+        <div class="header-right">
+          <button class="header-action-btn" id="themeToggleBtn" title="Toggle Theme">
+            <i class="fa-solid fa-sun"></i>
+          </button>
+
+          <div style="position:relative;">
+            <button class="header-action-btn" id="notifDropdownBtn" title="Notifications">
+              <i class="fa-regular fa-bell"></i>
+              <span class="action-badge">3</span>
+            </button>
+            <div class="notification-dropdown" id="notifDropdown">
+              <div class="notif-header">
+                <h6>Notifications</h6>
+                <button id="markAllReadBtn">Mark all as read</button>
+              </div>
+              <div class="notif-list">
+                <div class="notif-item">
+                  <div class="notif-icon-box"><i class="fa-solid fa-fire text-warning"></i></div>
+                  <div class="notif-content">
+                    <p>New collection dropped: <strong>Quantum Holograms</strong></p>
+                    <span>30 mins ago</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="user-profile-menu">
+            <div class="user-profile-trigger" id="userProfileTrigger">
+              <img src="assets/images/avatars/user.svg" alt="User Avatar" class="user-avatar-header header-user-avatar">
+              <div class="user-info-header">
+                <span class="user-name-header header-user-name">Alex Rivera</span>
+                <span class="user-role-header">Verified Collector</span>
+              </div>
+              <i class="fa-solid fa-chevron-down ms-1" style="font-size:11px; color:var(--text-muted);"></i>
+            </div>
+            <div class="profile-dropdown-menu" id="userProfileDropdown">
+              <div class="dropdown-user-info">
+                <h6 class="header-user-name">Alex Rivera</h6>
+                <p>alex.rivera@novanft.demo</p>
+              </div>
+              <a href="profile.html" class="profile-dropdown-item"><i class="fa-regular fa-user"></i> My Profile</a>
+              <a href="saved.html" class="profile-dropdown-item"><i class="fa-regular fa-heart"></i> Saved Items</a>
+              <a href="settings.html" class="profile-dropdown-item"><i class="fa-solid fa-gear"></i> Settings</a>
+              <div style="border-top:1px solid var(--border-color); margin:4px 0;"></div>
+              <a href="#" class="profile-dropdown-item text-danger btn-logout"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="content-body">
+        <!-- Header & Breadcrumbs -->
+        <div class="page-header-block d-flex justify-content-between align-items-center flex-wrap gap-3">
+          <div>
+            <h1 class="page-title d-flex align-items-center gap-2">
+              <i class="fa-solid fa-layer-group text-primary"></i> Explore Collections
+              <span class="badge" style="background:var(--bg-card); border:1px solid var(--border-color); color:var(--primary-light); font-size:14px; font-weight:700; border-radius:var(--radius-pill);" id="collectionsCountBadge">12 Artworks</span>
+            </h1>
+            <nav class="breadcrumb-nft">
+              <a href="index.html">Home</a>
+              <i class="fa-solid fa-chevron-right" style="font-size:10px;"></i>
+              <span class="active">Digital Collections</span>
+            </nav>
+          </div>
+
+          <!-- Quick Filters: Search in Collections & Sort -->
+          <div class="d-flex align-items-center gap-3 flex-wrap">
+            <div style="position:relative; width:220px;">
+              <i class="fa-solid fa-magnifying-glass" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); font-size:12px; color:var(--text-muted);"></i>
+              <input type="text" id="collectionsSearchInput" class="form-control form-control-sm" placeholder="Filter in list..." style="background:var(--bg-card); color:var(--text-main); border:1px solid var(--border-color); border-radius:var(--radius-pill); padding-left:32px; font-size:13px;">
+            </div>
+
+            <div class="d-flex align-items-center gap-2">
+              <span style="font-size:13px; color:var(--text-muted);">Sort:</span>
+              <select class="form-select form-select-sm" id="collectionsSortSelect" style="background:var(--bg-card); color:var(--text-main); border:1px solid var(--border-color); border-radius:var(--radius-pill); width:auto; font-size:13px; font-weight:600;">
+                <option value="popular">Most Popular</option>
+                <option value="price-low">Price: Low to High</option>
+                <option value="price-high">Price: High to Low</option>
+                <option value="ending-soon">Ending Soonest</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category Pills -->
+        <div class="filter-pills mb-4">
+          <button class="filter-pill collections-cat-pill active" data-category="All">All Categories</button>
+          <button class="filter-pill collections-cat-pill" data-category="Artwork">Artwork</button>
+          <button class="filter-pill collections-cat-pill" data-category="Book">Book</button>
+          <button class="filter-pill collections-cat-pill" data-category="3D Art">3D Art</button>
+          <button class="filter-pill collections-cat-pill" data-category="Metaverse">Metaverse</button>
+        </div>
+
+        <!-- Collections Grid -->
+        <div class="nft-card-grid" id="collectionsNFTGrid">
+          <!-- Dynamically populated by js/collections.js -->
+        </div>
+
+        <!-- Empty State Container -->
+        <div class="empty-state-wrap" id="collectionsEmptyState" style="display:none;">
+          <div class="empty-state-icon">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </div>
+          <h4>No NFTs Matched Your Filter</h4>
+          <p>Try clearing your search keyword or switching category tabs to view other collections.</p>
+          <button class="btn-outline-nft" onclick="document.getElementById('collectionsSearchInput').value=''; CollectionsPage.searchQuery=''; CollectionsPage.renderCollectionsGrid();">
+            Reset Filters
+          </button>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- UNIVERSAL BID MODAL -->
+  <div class="nft-modal-overlay" id="bidModalOverlay">
+    <div class="nft-modal-box">
+      <div class="nft-modal-header">
+        <h4><i class="fa-solid fa-gavel text-primary me-2"></i>Place a Bid</h4>
+        <button class="modal-close-btn" onclick="App.closeBidModal()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="nft-modal-body">
+        <div class="bid-item-preview">
+          <img src="" id="bidModalImg" alt="NFT Artwork">
+          <div class="bid-item-info">
+            <h5 id="bidModalTitle">NFT Title</h5>
+            <p id="bidModalCreator">by Creator</p>
+          </div>
+        </div>
+        <div class="bid-balance-row">
+          <span style="color:var(--text-muted);">Your Wallet Balance:</span>
+          <strong style="color:var(--success);"><i class="fa-brands fa-ethereum"></i> 18.45 ETH</strong>
+        </div>
+        <form id="placeBidModalForm">
+          <div class="bid-balance-row mb-1">
+            <span style="color:var(--text-secondary); font-size:12px;">Minimum required: <strong id="bidModalMinBid">0.00 ETH</strong></span>
+            <span style="color:var(--text-muted); font-size:12px;">Current: <strong id="bidModalCurrentBid">0.00 ETH</strong></span>
+          </div>
+          <div class="bid-input-container">
+            <input type="number" step="0.01" class="bid-input-field" id="bidAmountInput" placeholder="0.00" required>
+            <span class="bid-input-unit">ETH</span>
+          </div>
+          <div class="bid-quick-increments">
+            <button type="button" class="bid-increment-btn" data-inc="0.1">+0.1 ETH</button>
+            <button type="button" class="bid-increment-btn" data-inc="0.5">+0.5 ETH</button>
+            <button type="button" class="bid-increment-btn" data-inc="1.0">+1.0 ETH</button>
+          </div>
+          <div class="bid-breakdown">
+            <div class="breakdown-row"><span>Estimated Network Gas</span><span id="bidBreakdownGas">0.008 ETH</span></div>
+            <div class="breakdown-row total">
+              <span>Total Commitment</span>
+              <div><span id="bidBreakdownTotal">0.00 ETH</span><span style="font-size:11px; color:var(--text-muted); display:block;" id="bidBreakdownUsd">≈ $0</span></div>
+            </div>
+          </div>
+          <button type="submit" class="btn-primary-nft w-100 py-3" style="font-size:16px;">
+            <i class="fa-solid fa-lock"></i> Submit Official Bid
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- UNIVERSAL DETAILS MODAL -->
+  <div class="nft-modal-overlay" id="nftDetailsModalOverlay">
+    <div class="nft-modal-box modal-large">
+      <div class="nft-modal-header">
+        <h4>NFT Artwork Overview</h4>
+        <button class="modal-close-btn" onclick="App.closeNFTDetailsModal()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="nft-modal-body">
+        <div class="nft-details-grid">
+          <div><img src="" id="detailsModalImg" class="details-modal-img" alt="NFT Artwork"></div>
+          <div>
+            <div class="details-tags">
+              <span class="details-tag-badge" id="detailsModalCategory">ARTWORK</span>
+              <span class="details-tag-badge" id="detailsModalBadge" style="background:rgba(255,165,2,0.15); color:var(--warning);">★ RARE</span>
+            </div>
+            <h3 id="detailsModalTitle" style="font-weight:800; margin-bottom:8px;">Artwork Title</h3>
+            <div class="details-creator-row">
+              <img src="" id="detailsModalCreatorAvatar" class="details-creator-avatar" alt="Creator">
+              <div>
+                <h6 id="detailsModalCreatorName" style="margin:0; font-size:13px; font-weight:700;">Creator Name</h6>
+                <span id="detailsModalCreatorHandle" style="font-size:11px; color:var(--text-muted);">@handle</span>
+              </div>
+            </div>
+            <p id="detailsModalDesc" style="font-size:13px; color:var(--text-secondary); line-height:1.6; margin-bottom:16px;">Description...</p>
+            <div class="details-price-box">
+              <span style="font-size:11px; color:var(--text-muted); display:block;">Current Highest Bid</span>
+              <div style="display:flex; align-items:baseline; gap:8px;">
+                <h3 id="detailsModalCurrentBid" style="font-size:24px; font-weight:800; color:#fff; margin:0;">2.85 ETH</h3>
+                <span id="detailsModalUsd" style="font-size:13px; color:var(--text-muted);">($7,125 USD)</span>
+              </div>
+            </div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+              <button class="btn-primary-nft" id="detailsModalBidBtn"><i class="fa-solid fa-gavel"></i> Place Bid</button>
+              <button class="btn-outline-nft" id="detailsModalFullPageBtn"><i class="fa-solid fa-arrow-up-right-from-square"></i> Full Details</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/collections.js"></script>
+</body>
+</html>

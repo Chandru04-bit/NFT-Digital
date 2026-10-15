@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NFT Artwork Details - NovaNFT Marketplace</title>
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo/favicon.svg">
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Custom Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/themes.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    .details-page-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 36px;
+      margin-bottom: 40px;
+    }
+    .details-img-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      position: sticky;
+      top: calc(var(--header-height) + 24px);
+    }
+    .details-main-img-wrap {
+      aspect-ratio: 1/1;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background: var(--bg-secondary);
+      position: relative;
+    }
+    .details-main-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .details-tab-nav {
+      display: flex;
+      gap: 12px;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 20px;
+    }
+    .details-tab-btn {
+      padding: 10px 16px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-secondary);
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      transition: all var(--transition-speed);
+    }
+    .details-tab-btn.active {
+      color: var(--primary-light);
+      border-bottom-color: var(--primary);
+    }
+    @media (max-width: 991px) {
+      .details-page-grid {
+        grid-template-columns: 1fr;
+      }
+      .details-img-container {
+        position: static;
+      }
+    }
+  </style>
+</head>
+<body data-page="collections">
+
+  <div class="app-wrapper">
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+    <!-- SIDEBAR -->
+    <aside class="app-sidebar" id="appSidebar">
+      <div class="sidebar-header">
+        <a href="index.html" class="brand-logo">
+          <img src="assets/images/logo/favicon.svg" alt="NovaNFT Logo">
+          <span>Nova<span>NFT</span></span>
+        </a>
+      </div>
+
+      <div class="sidebar-nav">
+        <div class="nav-section-title">Main Menu</div>
+        <ul class="sidebar-menu">
+          <li class="sidebar-menu-item">
+            <a href="index.html"><i class="fa-solid fa-house"></i><span>Home</span></a>
+          </li>
+          <li class="sidebar-menu-item">
+            <a href="bids.html"><i class="fa-solid fa-gavel"></i><span>Bids</span><span class="nav-badge">Live</span></a>
+          </li>
+          <li class="sidebar-menu-item">
+            <a href="saved.html"><i class="fa-solid fa-heart"></i><span>Saved</span></a>
+          </li>
+          <li class="sidebar-menu-item active">
+            <a href="collections.html"><i class="fa-solid fa-layer-group"></i><span>Collections</span></a>
+          </li>
+          <li class="sidebar-menu-item">
+            <a href="profile.html"><i class="fa-solid fa-user"></i><span>Profile</span></a>
+          </li>
+          <li class="sidebar-menu-item">
+            <a href="settings.html"><i class="fa-solid fa-gear"></i><span>Settings</span></a>
+          </li>
+        </ul>
+
+        <div class="nav-section-title">Account</div>
+        <ul class="sidebar-menu">
+          <li class="sidebar-menu-item">
+            <a href="#" class="btn-logout"><i class="fa-solid fa-arrow-right-from-bracket"></i><span>Logout</span></a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-pro-card">
+          <i class="fa-solid fa-wand-magic-sparkles text-primary mb-2" style="font-size:22px;"></i>
+          <h5>Create Your NFT</h5>
+          <p>Mint and showcase your exclusive artworks globally.</p>
+          <a href="collections.html" class="btn-primary-nft btn-sm-nft w-100">Create NFT</a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <div class="app-main">
+      <header class="app-header">
+        <div class="header-left">
+          <button class="sidebar-toggle-btn" id="sidebarToggleBtn" aria-label="Toggle Navigation">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          
+          <div class="header-search">
+            <div class="search-input-wrapper">
+              <i class="fa-solid fa-magnifying-glass search-icon"></i>
+              <input type="text" class="search-input" id="globalSearchInput" placeholder="Search NFTs, collections, creators... (Press '/' to focus)">
+              <button class="search-clear-btn" id="searchClearBtn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="search-results-dropdown" id="searchResultsDropdown"></div>
+          </div>
+        </div>
+
+        <div class="header-right">
+          <button class="header-action-btn" id="themeToggleBtn" title="Toggle Theme">
+            <i class="fa-solid fa-sun"></i>
+          </button>
+
+          <div style="position:relative;">
+            <button class="header-action-btn" id="notifDropdownBtn" title="Notifications">
+              <i class="fa-regular fa-bell"></i>
+              <span class="action-badge">3</span>
+            </button>
+            <div class="notification-dropdown" id="notifDropdown">
+              <div class="notif-header">
+                <h6>Notifications</h6>
+                <button id="markAllReadBtn">Mark all as read</button>
+              </div>
+              <div class="notif-list">
+                <div class="notif-item">
+                  <div class="notif-icon-box"><i class="fa-solid fa-gavel"></i></div>
+                  <div class="notif-content">
+                    <p>New highest bid placed.</p>
+                    <span>Just now</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="user-profile-menu">
+            <div class="user-profile-trigger" id="userProfileTrigger">
+              <img src="assets/images/avatars/user.svg" alt="User Avatar" class="user-avatar-header header-user-avatar">
+              <div class="user-info-header">
+                <span class="user-name-header header-user-name">Alex Rivera</span>
+                <span class="user-role-header">Verified Collector</span>
+              </div>
+              <i class="fa-solid fa-chevron-down ms-1" style="font-size:11px; color:var(--text-muted);"></i>
+            </div>
+            <div class="profile-dropdown-menu" id="userProfileDropdown">
+              <div class="dropdown-user-info">
+                <h6 class="header-user-name">Alex Rivera</h6>
+                <p>alex.rivera@novanft.demo</p>
+              </div>
+              <a href="profile.html" class="profile-dropdown-item"><i class="fa-regular fa-user"></i> My Profile</a>
+              <a href="saved.html" class="profile-dropdown-item"><i class="fa-regular fa-heart"></i> Saved Items</a>
+              <a href="settings.html" class="profile-dropdown-item"><i class="fa-solid fa-gear"></i> Settings</a>
+              <div style="border-top:1px solid var(--border-color); margin:4px 0;"></div>
+              <a href="#" class="profile-dropdown-item text-danger btn-logout"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="content-body">
+        
+        <!-- Breadcrumbs -->
+        <nav class="breadcrumb-nft mb-4">
+          <a href="index.html">Home</a>
+          <i class="fa-solid fa-chevron-right" style="font-size:10px;"></i>
+          <a href="collections.html">Collections</a>
+          <i class="fa-solid fa-chevron-right" style="font-size:10px;"></i>
+          <span class="active" id="detailsBreadcrumbTitle">Artwork Details</span>
+        </nav>
+
+        <!-- Main Details Grid -->
+        <div class="details-page-grid">
+          <!-- Left Column: Artwork & Zoom/Badges -->
+          <div class="details-img-container">
+            <div class="details-main-img-wrap mb-3">
+              <img src="" id="detailsMainImg" alt="NFT Artwork">
+            </div>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="d-flex gap-2">
+                <span class="badge bg-primary" id="detailsCategoryBadge">ARTWORK</span>
+                <span class="badge" id="detailsRarityBadge" style="background:rgba(255,165,2,0.15); color:var(--warning); border:1px solid rgba(255,165,2,0.3);">★ RARE</span>
+              </div>
+              <div class="d-flex gap-3 text-muted" style="font-size:13px;">
+                <span><i class="fa-solid fa-gavel text-primary me-1"></i> <strong id="detailsBidsCount">24</strong> bids</span>
+                <span><i class="fa-solid fa-heart text-danger me-1"></i> <strong id="detailsLikesCount">340</strong> favorites</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Meta Info, Creator, Bidding Box -->
+          <div>
+            <div class="d-flex justify-content-between align-items-start mb-2">
+              <h1 style="font-size:32px; font-weight:800; line-height:1.2; margin:0;" id="detailsMainTitle">
+                Cyber Neon Samurai #042
+              </h1>
+              <button class="header-action-btn" id="detailsWishlistBtn" title="Add to Saved" style="flex-shrink:0;">
+                <i class="fa-regular fa-heart"></i>
+              </button>
+            </div>
+
+            <!-- Creator Card -->
+            <div class="p-3 mb-4" style="background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-md); display:flex; align-items:center; justify-content:space-between;">
+              <div class="d-flex align-items-center gap-3">
+                <img src="" id="detailsCreatorAvatar" alt="Creator Avatar" style="width:44px; height:44px; border-radius:50%; object-fit:cover;">
+                <div>
+                  <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase; font-weight:700;">Created by</div>
+                  <strong style="color:#fff; font-size:14px;" id="detailsCreatorName">Aura_Master</strong>
+                  <span id="detailsCreatorHandle" style="font-size:12px; color:var(--text-muted); margin-left:4px;">@auramaster</span>
+                </div>
+              </div>
+              <a href="profile.html" class="btn btn-sm btn-outline-secondary" style="border-radius:var(--radius-pill); font-size:12px;">View Profile</a>
+            </div>
+
+            <!-- Description -->
+            <div class="mb-4">
+              <h5 style="font-size:14px; font-weight:700; color:var(--text-muted); text-transform:uppercase; margin-bottom:8px;">Description</h5>
+              <p id="detailsDescription" style="font-size:14px; color:var(--text-secondary); line-height:1.7;">
+                Artwork description here...
+              </p>
+            </div>
+
+            <!-- Price & Auction Box -->
+            <div class="p-4 mb-4" style="background:linear-gradient(145deg, #1f1b3e 0%, #15122b 100%); border:1px solid rgba(115,91,242,0.3); border-radius:var(--radius-lg);">
+              <div class="row align-items-center g-3">
+                <div class="col-sm-6">
+                  <span style="font-size:12px; color:var(--text-muted); text-transform:uppercase; font-weight:700;">Current Highest Bid</span>
+                  <div class="d-flex align-items-baseline gap-2 mt-1">
+                    <h2 style="font-size:30px; font-weight:800; color:#fff; margin:0;" id="detailsCurrentBid">2.85 ETH</h2>
+                  </div>
+                  <div style="font-size:12px; color:var(--text-muted);" id="detailsCurrentUsd">≈ $7,125 USD</div>
+                </div>
+
+                <div class="col-sm-6">
+                  <span style="font-size:12px; color:var(--text-muted); text-transform:uppercase; font-weight:700;">Auction Ending In</span>
+                  <div class="mt-1" style="font-size:20px; font-weight:800; color:var(--warning);">
+                    <i class="fa-regular fa-clock me-1"></i>
+                    <span id="detailsCountdownTimer" class="countdown-timer" data-hours="14.5">14h 29m 45s</span>
+                  </div>
+                  <div style="font-size:11px; color:var(--text-muted);">Starting price: <span id="detailsStartingPrice">1.50 ETH</span></div>
+                </div>
+              </div>
+
+              <div class="mt-4 pt-3" style="border-top:1px solid rgba(255,255,255,0.08);">
+                <button class="btn-primary-nft w-100 py-3" id="detailsPlaceBidBtn" style="font-size:16px;">
+                  <i class="fa-solid fa-gavel"></i> Place a Bid Now
+                </button>
+              </div>
+            </div>
+
+            <!-- Attributes & Rarity -->
+            <div class="mb-4">
+              <h5 style="font-size:14px; font-weight:700; color:var(--text-muted); text-transform:uppercase; margin-bottom:12px;">Attributes &amp; Properties</h5>
+              <div id="detailsAttributesGrid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(130px, 1fr)); gap:12px;"></div>
+            </div>
+
+            <!-- Bidding History & Provenance Tabs -->
+            <div class="nft-dashboard-card">
+              <div class="details-tab-nav">
+                <button class="details-tab-btn active" data-tab="history">Bid History</button>
+                <button class="details-tab-btn" data-tab="provenance">Provenance &amp; Details</button>
+              </div>
+
+              <div id="detailsBidHistoryPane">
+                <div class="table-responsive-wrapper">
+                  <table class="nft-table">
+                    <thead>
+                      <tr>
+                        <th>Bidder</th>
+                        <th>Offer</th>
+                        <th>USD Value</th>
+                        <th>Time</th>
+                      </tr>
+                    </thead>
+                    <tbody id="detailsBidHistoryBody"></tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div id="detailsProvenancePane" style="display:none; font-size:13px; color:var(--text-secondary); line-height:1.7;">
+                <p><strong>Contract Address:</strong> <code>0x495f947276749Ce646f68AC8c248420045cb7b5e</code></p>
+                <p><strong>Token ID:</strong> <code>10482910482910294820194</code></p>
+                <p><strong>Token Standard:</strong> ERC-721</p>
+                <p><strong>Blockchain:</strong> Ethereum (Mainnet)</p>
+                <p><strong>Metadata:</strong> Immutable IPFS Storage</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Related Artworks Section -->
+        <section class="mt-5">
+          <div class="section-header">
+            <div>
+              <h3 class="section-title"><i class="fa-solid fa-sparkles text-primary"></i> More From This Category</h3>
+              <div class="section-subtitle">Discover recommended items from top digital creators</div>
+            </div>
+            <a href="collections.html" class="btn-outline-nft btn-sm-nft">Explore All</a>
+          </div>
+          <div class="nft-card-grid" id="detailsRelatedGrid"></div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- UNIVERSAL BID MODAL -->
+  <div class="nft-modal-overlay" id="bidModalOverlay">
+    <div class="nft-modal-box">
+      <div class="nft-modal-header">
+        <h4><i class="fa-solid fa-gavel text-primary me-2"></i>Place a Bid</h4>
+        <button class="modal-close-btn" onclick="App.closeBidModal()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="nft-modal-body">
+        <div class="bid-item-preview">
+          <img src="" id="bidModalImg" alt="NFT Artwork">
+          <div class="bid-item-info">
+            <h5 id="bidModalTitle">NFT Title</h5>
+            <p id="bidModalCreator">by Creator</p>
+          </div>
+        </div>
+        <div class="bid-balance-row">
+          <span style="color:var(--text-muted);">Your Wallet Balance:</span>
+          <strong style="color:var(--success);"><i class="fa-brands fa-ethereum"></i> 18.45 ETH</strong>
+        </div>
+        <form id="placeBidModalForm">
+          <div class="bid-balance-row mb-1">
+            <span style="color:var(--text-secondary); font-size:12px;">Minimum: <strong id="bidModalMinBid">0.00 ETH</strong></span>
+            <span style="color:var(--text-muted); font-size:12px;">Current: <strong id="bidModalCurrentBid">0.00 ETH</strong></span>
+          </div>
+          <div class="bid-input-container">
+            <input type="number" step="0.01" class="bid-input-field" id="bidAmountInput" placeholder="0.00" required>
+            <span class="bid-input-unit">ETH</span>
+          </div>
+          <div class="bid-quick-increments">
+            <button type="button" class="bid-increment-btn" data-inc="0.1">+0.1 ETH</button>
+            <button type="button" class="bid-increment-btn" data-inc="0.5">+0.5 ETH</button>
+            <button type="button" class="bid-increment-btn" data-inc="1.0">+1.0 ETH</button>
+          </div>
+          <div class="bid-breakdown">
+            <div class="breakdown-row"><span>Gas Fee</span><span id="bidBreakdownGas">0.008 ETH</span></div>
+            <div class="breakdown-row total">
+              <span>Total Commitment</span>
+              <div><span id="bidBreakdownTotal">0.00 ETH</span><span style="font-size:11px; color:var(--text-muted); display:block;" id="bidBreakdownUsd">≈ $0</span></div>
+            </div>
+          </div>
+          <button type="submit" class="btn-primary-nft w-100 py-3" style="font-size:16px;">
+            <i class="fa-solid fa-lock"></i> Submit Official Bid
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/nft-details.js"></script>
+</body>
+</html>

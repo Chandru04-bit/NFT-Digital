@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NovaNFT - Complete NFT Digital Marketplace Dashboard</title>
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo/favicon.svg">
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Custom Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/themes.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body data-page="home">
+
+  <div class="app-wrapper">
+    <!-- Mobile Backdrop -->
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+    <!-- ==========================================
+         SIDEBAR NAVIGATION
+         ========================================== -->
+    <aside class="app-sidebar" id="appSidebar">
+      <div class="sidebar-header">
+        <a href="index.html" class="brand-logo">
+          <img src="assets/images/logo/favicon.svg" alt="NovaNFT Logo">
+          <span>Nova<span>NFT</span></span>
+        </a>
+      </div>
+
+      <div class="sidebar-nav">
+        <div class="nav-section-title">Main Menu</div>
+        <ul class="sidebar-menu">
+          <li class="sidebar-menu-item active">
+            <a href="index.html">
+              <i class="fa-solid fa-house"></i>
+              <span>Home</span>
+            </a>
+          </li>
+          <li class="sidebar-menu-item">
+            <a href="bids.html">
+              <i class="fa-solid fa-gavel"></i>
+              <span>Bids</span>
+              <span class="nav-badge">Live</span>
+            </a>
+          </li>
+          <li class="sidebar-menu-item">
+            <a href="saved.html">
+              <i class="fa-solid fa-heart"></i>
+              <span>Saved</span>
+            </a>
+          </li>
+          <li class="sidebar-menu-item">
+            <a href="collections.html">
+              <i class="fa-solid fa-layer-group"></i>
+              <span>Collections</span>
+            </a>
+          </li>
+          <li class="sidebar-menu-item">
+            <a href="profile.html">
+              <i class="fa-solid fa-user"></i>
+              <span>Profile</span>
+            </a>
+          </li>
+          <li class="sidebar-menu-item">
+            <a href="settings.html">
+              <i class="fa-solid fa-gear"></i>
+              <span>Settings</span>
+            </a>
+          </li>
+        </ul>
+
+        <div class="nav-section-title">Account</div>
+        <ul class="sidebar-menu">
+          <li class="sidebar-menu-item">
+            <a href="#" class="btn-logout">
+              <i class="fa-solid fa-arrow-right-from-bracket"></i>
+              <span>Logout</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-pro-card">
+          <i class="fa-solid fa-wand-magic-sparkles text-primary mb-2" style="font-size:22px;"></i>
+          <h5>Create Your NFT</h5>
+          <p>Mint and showcase your exclusive artworks globally.</p>
+          <a href="collections.html" class="btn-primary-nft btn-sm-nft w-100">
+            Create NFT
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ==========================================
+         MAIN WRAPPER & HEADER
+         ========================================== -->
+    <div class="app-main">
+      <!-- TOP HEADER -->
+      <header class="app-header">
+        <div class="header-left">
+          <button class="sidebar-toggle-btn" id="sidebarToggleBtn" aria-label="Toggle Navigation">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          
+          <div class="header-search">
+            <div class="search-input-wrapper">
+              <i class="fa-solid fa-magnifying-glass search-icon"></i>
+              <input type="text" class="search-input" id="globalSearchInput" placeholder="Search NFTs, collections, creators... (Press '/' to focus)">
+              <button class="search-clear-btn" id="searchClearBtn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <!-- Live Search Autocomplete Dropdown -->
+            <div class="search-results-dropdown" id="searchResultsDropdown"></div>
+          </div>
+        </div>
+
+        <div class="header-right">
+          <!-- Theme Switcher -->
+          <button class="header-action-btn" id="themeToggleBtn" title="Toggle Theme">
+            <i class="fa-solid fa-sun"></i>
+          </button>
+
+          <!-- Notification Bell -->
+          <div style="position:relative;">
+            <button class="header-action-btn" id="notifDropdownBtn" title="Notifications">
+              <i class="fa-regular fa-bell"></i>
+              <span class="action-badge">3</span>
+            </button>
+            <div class="notification-dropdown" id="notifDropdown">
+              <div class="notif-header">
+                <h6>Notifications</h6>
+                <button id="markAllReadBtn">Mark all as read</button>
+              </div>
+              <div class="notif-list">
+                <div class="notif-item">
+                  <div class="notif-icon-box"><i class="fa-solid fa-gavel"></i></div>
+                  <div class="notif-content">
+                    <p>New highest bid of <strong>2.85 ETH</strong> on Cyber Neon Samurai.</p>
+                    <span>2 mins ago</span>
+                  </div>
+                </div>
+                <div class="notif-item">
+                  <div class="notif-icon-box"><i class="fa-solid fa-user-plus"></i></div>
+                  <div class="notif-content">
+                    <p><strong>Aura_Master</strong> started following your profile.</p>
+                    <span>1 hour ago</span>
+                  </div>
+                </div>
+                <div class="notif-item">
+                  <div class="notif-icon-box"><i class="fa-solid fa-circle-check text-success"></i></div>
+                  <div class="notif-content">
+                    <p>Your offer on <strong>Genesis Codex</strong> was accepted!</p>
+                    <span>5 hours ago</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- User Profile Dropdown -->
+          <div class="user-profile-menu">
+            <div class="user-profile-trigger" id="userProfileTrigger">
+              <img src="assets/images/avatars/user.svg" alt="User Avatar" class="user-avatar-header header-user-avatar">
+              <div class="user-info-header">
+                <span class="user-name-header header-user-name">Alex Rivera</span>
+                <span class="user-role-header">Verified Collector</span>
+              </div>
+              <i class="fa-solid fa-chevron-down ms-1" style="font-size:11px; color:var(--text-muted);"></i>
+            </div>
+            <div class="profile-dropdown-menu" id="userProfileDropdown">
+              <div class="dropdown-user-info">
+                <h6 class="header-user-name">Alex Rivera</h6>
+                <p>alex.rivera@novanft.demo</p>
+              </div>
+              <a href="profile.html" class="profile-dropdown-item">
+                <i class="fa-regular fa-user"></i> My Profile
+              </a>
+              <a href="saved.html" class="profile-dropdown-item">
+                <i class="fa-regular fa-heart"></i> Saved Items
+              </a>
+              <a href="settings.html" class="profile-dropdown-item">
+                <i class="fa-solid fa-gear"></i> Settings
+              </a>
+              <div style="border-top:1px solid var(--border-color); margin:4px 0;"></div>
+              <a href="#" class="profile-dropdown-item text-danger btn-logout">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+              </a>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- ==========================================
+           PAGE CONTENT: HOME DASHBOARD
+           ========================================== -->
+      <main class="content-body">
+        
+        <!-- 1. HERO BANNER SECTION -->
+        <section class="hero-banner-container">
+          <div class="hero-grid">
+            <div class="hero-content-col">
+              <span class="hero-badge-tag">
+                <i class="fa-solid fa-fire text-warning"></i> Premier Digital Marketplace
+              </span>
+              <h1 class="hero-title">
+                Discover, Collect, Sell and Create Your NFT
+              </h1>
+              <p class="hero-subtitle">
+                Explore the world's finest non-fungible tokens. Discover exclusive digital art, collect rare items, and trade seamlessly on the Ethereum blockchain.
+              </p>
+              <div class="hero-actions">
+                <a href="#trendingSection" class="btn-primary-nft">
+                  <i class="fa-solid fa-compass"></i> Explore Artworks
+                </a>
+                <a href="collections.html" class="btn-outline-nft">
+                  <i class="fa-solid fa-plus"></i> Create NFT
+                </a>
+              </div>
+              <div class="hero-stats-row">
+                <div class="hero-stat-item">
+                  <h4>45K+</h4>
+                  <p>Artworks</p>
+                </div>
+                <div class="hero-stat-item">
+                  <h4>18K+</h4>
+                  <p>Auctions</p>
+                </div>
+                <div class="hero-stat-item">
+                  <h4>24K+</h4>
+                  <p>Creators</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Featured NFT Card -->
+            <div class="hero-featured-col">
+              <div class="featured-nft-card" id="heroFeaturedCard">
+                <!-- Dynamically loaded by js/home.js -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. QUICK METRIC KPI CARDS -->
+        <section class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-info">
+              <p>Total Volume</p>
+              <h3>8,429.5 ETH</h3>
+              <span class="stat-badge positive"><i class="fa-solid fa-arrow-trend-up"></i> +14.8% this week</span>
+            </div>
+            <div class="stat-icon-wrap stat-icon-purple">
+              <i class="fa-brands fa-ethereum"></i>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-info">
+              <p>ETH Balance</p>
+              <h3>18.45 ETH</h3>
+              <span class="stat-badge positive"><i class="fa-solid fa-wallet"></i> ≈ $46,125 USD</span>
+            </div>
+            <div class="stat-icon-wrap stat-icon-blue">
+              <i class="fa-solid fa-wallet"></i>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-info">
+              <p>NFTs Sold</p>
+              <h3>1,248 Items</h3>
+              <span class="stat-badge positive"><i class="fa-solid fa-arrow-trend-up"></i> +8.2% sales</span>
+            </div>
+            <div class="stat-icon-wrap stat-icon-green">
+              <i class="fa-solid fa-cart-shopping"></i>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-info">
+              <p>Active Auctions</p>
+              <h3>142 Live</h3>
+              <span class="stat-badge negative"><i class="fa-solid fa-clock"></i> 24 Ending Soon</span>
+            </div>
+            <div class="stat-icon-wrap stat-icon-orange">
+              <i class="fa-solid fa-fire"></i>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. TRENDING BIDS SECTION -->
+        <section class="mb-5" id="trendingSection">
+          <div class="section-header">
+            <div>
+              <h2 class="section-title">
+                <i class="fa-solid fa-arrow-trend-up"></i> Trending Bids
+              </h2>
+              <div class="section-subtitle">Highest valued and active bidding auctions in the ecosystem</div>
+            </div>
+            <!-- Category Filters -->
+            <div class="filter-pills">
+              <button class="filter-pill category-filter-btn active" data-category="All">All Categories</button>
+              <button class="filter-pill category-filter-btn" data-category="Artwork">Artwork</button>
+              <button class="filter-pill category-filter-btn" data-category="Book">Book</button>
+              <button class="filter-pill category-filter-btn" data-category="3D Art">3D Art</button>
+              <button class="filter-pill category-filter-btn" data-category="Metaverse">Metaverse</button>
+            </div>
+          </div>
+
+          <!-- Cards Grid -->
+          <div class="nft-card-grid" id="trendingNFTGrid">
+            <!-- Dynamically populated by js/home.js -->
+          </div>
+        </section>
+
+        <!-- 4. DASHBOARD CHARTS SECTION -->
+        <section class="charts-grid">
+          <!-- ETH Price History Chart -->
+          <div class="chart-card">
+            <div class="chart-header">
+              <div>
+                <h5>ETH Price Market Trend</h5>
+                <span style="font-size:12px; color:var(--text-muted);">Real-time Ethereum live price index</span>
+              </div>
+              <div class="chart-tabs">
+                <button class="chart-tab-btn" data-period="1D">1D</button>
+                <button class="chart-tab-btn active" data-period="7D">7D</button>
+                <button class="chart-tab-btn" data-period="1M">1M</button>
+                <button class="chart-tab-btn" data-period="1Y">1Y</button>
+              </div>
+            </div>
+            <div class="chart-body">
+              <canvas id="ethPriceChart"></canvas>
+            </div>
+          </div>
+
+          <!-- Artwork Sold vs Cancelled Doughnut Chart -->
+          <div class="chart-card">
+            <div class="chart-header">
+              <div>
+                <h5>Artwork Statistics</h5>
+                <span style="font-size:12px; color:var(--text-muted);">Sold vs active vs cancelled bids</span>
+              </div>
+            </div>
+            <div class="chart-body" style="height:200px;">
+              <canvas id="artworksDoughnutChart"></canvas>
+            </div>
+            <div class="doughnut-legend">
+              <div class="doughnut-legend-item">
+                <span><span class="legend-color-dot" style="background:#735bf2;"></span> Artworks Sold</span>
+                <strong>68%</strong>
+              </div>
+              <div class="doughnut-legend-item">
+                <span><span class="legend-color-dot" style="background:#00d084;"></span> Active Auctions</span>
+                <strong>22%</strong>
+              </div>
+              <div class="doughnut-legend-item">
+                <span><span class="legend-color-dot" style="background:#ff4757;"></span> Cancelled Bids</span>
+                <strong>10%</strong>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. TOP CREATORS & RECENT ACTIVITY -->
+        <section class="creators-activity-grid">
+          <!-- Top Creators -->
+          <div class="nft-dashboard-card">
+            <div class="section-header mb-3">
+              <h3 class="section-title" style="font-size:18px;">
+                <i class="fa-solid fa-crown text-warning"></i> Top Creators
+              </h3>
+              <a href="collections.html" style="font-size:12px; font-weight:600; color:var(--primary-light);">Explore All</a>
+            </div>
+            <div class="creators-list" id="topCreatorsList">
+              <!-- Dynamically populated by js/home.js -->
+            </div>
+          </div>
+
+          <!-- Recent Activity -->
+          <div class="nft-dashboard-card">
+            <div class="section-header mb-3">
+              <h3 class="section-title" style="font-size:18px;">
+                <i class="fa-solid fa-clock-rotate-left text-primary"></i> Recent Activity
+              </h3>
+              <span style="font-size:12px; color:var(--text-muted);">Real-time events</span>
+            </div>
+            <div class="activity-list" id="recentActivityList">
+              <!-- Dynamically populated by js/home.js -->
+            </div>
+          </div>
+        </section>
+
+        <!-- 6. ACTIVE BIDS TABLE -->
+        <section class="mb-4">
+          <div class="section-header">
+            <div>
+              <h2 class="section-title">
+                <i class="fa-solid fa-gavel"></i> Active Bids
+              </h2>
+              <div class="section-subtitle">Real-time status of current live bids and offers</div>
+            </div>
+            <a href="bids.html" class="btn-outline-nft btn-sm-nft">
+              View All Bids <i class="fa-solid fa-arrow-right ms-1"></i>
+            </a>
+          </div>
+
+          <div class="table-responsive-wrapper">
+            <table class="nft-table">
+              <thead>
+                <tr>
+                  <th>Item</th>
+                  <th>Open Price</th>
+                  <th>Your Offer</th>
+                  <th>Recent Offer</th>
+                  <th>Time Left</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="homeActiveBidsTableBody">
+                <!-- Dynamically populated by js/home.js -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       UNIVERSAL BID SUBMISSION MODAL
+       ========================================== -->
+  <div class="nft-modal-overlay" id="bidModalOverlay">
+    <div class="nft-modal-box">
+      <div class="nft-modal-header">
+        <h4><i class="fa-solid fa-gavel text-primary me-2"></i>Place a Bid</h4>
+        <button class="modal-close-btn" onclick="App.closeBidModal()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="nft-modal-body">
+        <!-- Item Preview -->
+        <div class="bid-item-preview">
+          <img src="" id="bidModalImg" alt="NFT Artwork">
+          <div class="bid-item-info">
+            <h5 id="bidModalTitle">NFT Title</h5>
+            <p id="bidModalCreator">by Creator</p>
+          </div>
+        </div>
+
+        <!-- Balance Info -->
+        <div class="bid-balance-row">
+          <span style="color:var(--text-muted);">Your Wallet Balance:</span>
+          <strong style="color:var(--success);"><i class="fa-brands fa-ethereum"></i> 18.45 ETH</strong>
+        </div>
+
+        <form id="placeBidModalForm">
+          <div class="bid-balance-row mb-1">
+            <span style="color:var(--text-secondary); font-size:12px;">Minimum required bid: <strong id="bidModalMinBid">0.00 ETH</strong></span>
+            <span style="color:var(--text-muted); font-size:12px;">Current: <strong id="bidModalCurrentBid">0.00 ETH</strong></span>
+          </div>
+
+          <div class="bid-input-container">
+            <input type="number" step="0.01" class="bid-input-field" id="bidAmountInput" placeholder="0.00" required>
+            <span class="bid-input-unit">ETH</span>
+          </div>
+
+          <!-- Quick Increment Buttons -->
+          <div class="bid-quick-increments">
+            <button type="button" class="bid-increment-btn" data-inc="0.1">+0.1 ETH</button>
+            <button type="button" class="bid-increment-btn" data-inc="0.5">+0.5 ETH</button>
+            <button type="button" class="bid-increment-btn" data-inc="1.0">+1.0 ETH</button>
+          </div>
+
+          <!-- Gas & Total Breakdown -->
+          <div class="bid-breakdown">
+            <div class="breakdown-row">
+              <span>Estimated Network Gas Fee</span>
+              <span id="bidBreakdownGas">0.008 ETH</span>
+            </div>
+            <div class="breakdown-row total">
+              <span>Total Commitment</span>
+              <div>
+                <span id="bidBreakdownTotal">0.00 ETH</span>
+                <span style="font-size:11px; color:var(--text-muted); display:block;" id="bidBreakdownUsd">≈ $0</span>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-primary-nft w-100 py-3" style="font-size:16px;">
+            <i class="fa-solid fa-lock"></i> Submit Official Bid
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       UNIVERSAL NFT DETAILS QUICK MODAL
+       ========================================== -->
+  <div class="nft-modal-overlay" id="nftDetailsModalOverlay">
+    <div class="nft-modal-box modal-large">
+      <div class="nft-modal-header">
+        <h4>NFT Artwork Overview</h4>
+        <button class="modal-close-btn" onclick="App.closeNFTDetailsModal()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="nft-modal-body">
+        <div class="nft-details-grid">
+          <div>
+            <img src="" id="detailsModalImg" class="details-modal-img" alt="NFT Artwork">
+          </div>
+          <div>
+            <div class="details-tags">
+              <span class="details-tag-badge" id="detailsModalCategory">ARTWORK</span>
+              <span class="details-tag-badge" id="detailsModalBadge" style="background:rgba(255,165,2,0.15); color:var(--warning);">★ RARE</span>
+            </div>
+
+            <h3 id="detailsModalTitle" style="font-weight:800; margin-bottom:8px;">Artwork Title</h3>
+
+            <div class="details-creator-row">
+              <img src="" id="detailsModalCreatorAvatar" class="details-creator-avatar" alt="Creator">
+              <div>
+                <h6 id="detailsModalCreatorName" style="margin:0; font-size:13px; font-weight:700;">Creator Name</h6>
+                <span id="detailsModalCreatorHandle" style="font-size:11px; color:var(--text-muted);">@handle</span>
+              </div>
+            </div>
+
+            <p id="detailsModalDesc" style="font-size:13px; color:var(--text-secondary); line-height:1.6; margin-bottom:16px;">
+              Description here...
+            </p>
+
+            <div class="details-price-box">
+              <span style="font-size:11px; color:var(--text-muted); display:block;">Current Highest Bid</span>
+              <div style="display:flex; align-items:baseline; gap:8px;">
+                <h3 id="detailsModalCurrentBid" style="font-size:24px; font-weight:800; color:#fff; margin:0;">2.85 ETH</h3>
+                <span id="detailsModalUsd" style="font-size:13px; color:var(--text-muted);">($7,125 USD)</span>
+              </div>
+            </div>
+
+            <div style="margin-bottom:16px;">
+              <h6 style="font-size:12px; font-weight:700; text-transform:uppercase; color:var(--text-muted); margin-bottom:8px;">Attributes & Rarity</h6>
+              <div id="detailsModalAttributes" style="display:grid; grid-template-columns:repeat(3, 1fr); gap:8px;"></div>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+              <button class="btn-primary-nft" id="detailsModalBidBtn">
+                <i class="fa-solid fa-gavel"></i> Place Bid
+              </button>
+              <button class="btn-outline-nft" id="detailsModalFullPageBtn">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i> Full Details
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/home.js"></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="50" height="50">
+  <defs>
+    <linearGradient id="markGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#735bf2"/>
+      <stop offset="100%" stop-color="#00f2fe"/>
+    </linearGradient>
+  </defs>
+  <polygon points="25,4 45,15 45,35 25,46 5,35 5,15" fill="url(#markGrad)"/>
+  <polygon points="25,12 38,19 38,31 25,38 12,31 12,19" fill="#121025"/>
+  <circle cx="25" cy="25" r="6" fill="#735bf2"/>
+</svg>

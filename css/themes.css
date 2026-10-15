@@ -1,0 +1,103 @@
+/* ===================================================================
+   NFT DIGITAL MARKETPLACE - THEMES STYLESHEET
+   Light & Dark Theme Variables and Smooth Theme Transitions
+   =================================================================== */
+
+/* Smooth Transition on Theme Switch */
+body,
+.app-sidebar,
+.app-header,
+.nft-dashboard-card,
+.stat-card,
+.chart-card,
+.nft-card,
+.creator-item,
+.activity-item,
+.table-responsive-wrapper,
+.search-input,
+.header-action-btn,
+.user-profile-trigger,
+.nft-modal-box {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Light Theme Variables */
+[data-theme="light"] {
+  --bg-primary: #f5f6fc;
+  --bg-secondary: #f0f2fb;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f8f9ff;
+  --bg-sidebar: #ffffff;
+  --bg-header: rgba(255, 255, 255, 0.9);
+  --bg-input: #f0f2fb;
+  --bg-badge: rgba(115, 91, 242, 0.1);
+
+  /* Text & Border Colors */
+  --text-main: #13112a;
+  --text-secondary: #5a5779;
+  --text-muted: #8c89a8;
+  --border-color: rgba(0, 0, 0, 0.08);
+  --border-focus: #735bf2;
+
+  /* Elevation Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 8px 24px rgba(115, 91, 242, 0.08);
+  --shadow-lg: 0 16px 36px rgba(115, 91, 242, 0.12);
+}
+
+[data-theme="light"] .brand-logo span {
+  background: linear-gradient(135deg, #13112a 60%, var(--primary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+[data-theme="light"] .hero-banner-container {
+  background: linear-gradient(135deg, #f0eefc 0%, #e8e4fa 100%);
+  border-color: rgba(115, 91, 242, 0.2);
+}
+
+[data-theme="light"] .hero-title {
+  background: linear-gradient(180deg, #13112a 40%, var(--primary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+[data-theme="light"] .hero-stat-item h4 {
+  color: #13112a;
+}
+
+[data-theme="light"] .featured-nft-card {
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .featured-bid-box {
+  background: #f5f6fc;
+}
+
+[data-theme="light"] .featured-bid-val h5 {
+  color: #13112a;
+}
+
+[data-theme="light"] .nft-table th {
+  background: #f5f6fc;
+}
+
+[data-theme="light"] .sidebar-pro-card {
+  background: linear-gradient(145deg, #ede9fe 0%, #f3f0ff 100%);
+  border-color: rgba(115, 91, 242, 0.2);
+}
+
+[data-theme="light"] .sidebar-pro-card h5 {
+  color: #13112a;
+}
+
+[data-theme="light"] .bid-item-preview,
+[data-theme="light"] .details-price-box {
+  background: #f5f6fc;
+}
+
+[data-theme="light"] .bid-input-field {
+  background: #ffffff;
+  color: #13112a;
+}
